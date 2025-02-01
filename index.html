@@ -3,76 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plantilla de Contacto Dinámica</title>
+    <title>Registro de Evento Penta</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Animations */
         @keyframes float {
-            0% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        @keyframes glow {
-            0% { text-shadow: 0 0 5px #f5f5dc, 0 0 10px #f5f5dc; }
-            50% { text-shadow: 0 0 20px #f5f5dc, 0 0 30px #f5f5dc; }
-            100% { text-shadow: 0 0 5px #f5f5dc, 0 0 10px #f5f5dc; }
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        @keyframes shine {
-            0% { background-position: -100% 0; }
-            100% { background-position: 200% 0; }
-        }
-
+        /* Base styles */
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
             min-height: 100vh;
             margin: 0;
             padding: 20px;
-            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .header {
-            color: #f5f5dc;
-            font-size: 34px;
-            margin-bottom: 20px;
-            text-align: center;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            margin-bottom: 30px;
             animation: float 3s ease-in-out infinite;
         }
 
         .header i {
-            font-size: 50px;
-            animation: glow 2s ease-in-out infinite;
+            font-size: 2.5rem;
+            color: #60a5fa;
         }
 
         .main-container {
@@ -82,194 +50,113 @@
             width: 100%;
             justify-content: center;
             flex-wrap: wrap;
-            perspective: 1000px;
         }
 
-        .info-container {
-            background: linear-gradient(145deg, #1e1e1e, #2d2d2d);
-            border-radius: 15px;
+        .card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
             padding: 30px;
-            width: 350px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease;
-        }
-
-        .info-container:hover {
-            transform: translateZ(20px) rotateX(5deg);
-        }
-
-        .form-container {
-            background: linear-gradient(145deg, #1e1e1e, #2d2d2d);
-            border-radius: 15px;
-            padding: 30px;
-            width: 400px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            animation: fadeInScale 0.8s ease-out;
-        }
-
-        .profile-pic {
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #4a90e2, #7b68ee);
-            animation: float 6s ease-in-out infinite;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .title {
-            font-size: 38px;
-            background: linear-gradient(145deg, #f5f5dc, #ffd700);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            text-align: center;
-            animation: glow 3s ease-in-out infinite;
-        }
-
-        .subtitle {
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            border-left: 4px solid #4a90e2;
-            animation: slideIn 0.8s ease-out;
-        }
-
-        .subtitle span {
-            display: block;
-            margin-bottom: 10px;
-            opacity: 0;
-            animation: fadeInScale 0.5s ease-out forwards;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: slideIn 0.5s ease-out forwards;
-        }
-
-        .form-group:nth-child(1) { animation-delay: 0.2s; }
-        .form-group:nth-child(2) { animation-delay: 0.4s; }
-        .form-group:nth-child(3) { animation-delay: 0.6s; }
-        .form-group:nth-child(4) { animation-delay: 0.8s; }
-
-        .form-group label {
-            font-size: 16px;
-            font-weight: 600;
-            color: #4a90e2;
-            transform: translateX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .form-group:hover label {
-            transform: translateX(5px);
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            background: rgba(51, 51, 51, 0.8);
-            color: #fff;
-            border: 2px solid transparent;
-            border-radius: 8px;
-            padding: 12px;
-            font-size: 16px;
-            width: 100%;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            border-color: #4a90e2;
-            background: rgba(74, 144, 226, 0.1);
-            outline: none;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .button {
-            background: linear-gradient(90deg, #4a90e2, #7b68ee, #4a90e2);
-            background-size: 200% auto;
-            color: #ffffff;
-            border: none;
-            border-radius: 25px;
-            padding: 15px 30px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            animation: fadeInScale 0.5s ease-out 1s forwards;
-            opacity: 0;
-        }
-
-        .button:hover {
-            animation: shine 3s infinite linear;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(74, 144, 226, 0.4);
-        }
-
-        .loading, .result {
-            display: none;
-            background: linear-gradient(145deg, #1e1e1e, #2d2d2d);
-            border-radius: 15px;
-            padding: 30px;
-            width: 400px;
-            text-align: center;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .loading.fade-in, .result.fade-in {
-            display: block;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             animation: fadeInScale 0.5s ease-out;
         }
 
-        .loading i {
-            font-size: 50px;
-            color: #4a90e2;
-            animation: spin 1.5s linear infinite;
+        .info-container {
+            width: 350px;
+            text-align: center;
         }
 
-        .result {
-            background: linear-gradient(145deg, #1e1e1e, #2d2d2d);
+        .form-container {
+            width: 400px;
         }
 
-        .result-title {
-            font-size: 28px;
-            color: #4a90e2;
+        /* Form styles */
+        .form-group {
             margin-bottom: 20px;
         }
 
-        .result-data {
-            font-size: 18px;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: rgba(255,255,255,0.05);
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #60a5fa;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: rgba(51, 65, 85, 0.8);
+            border: 2px solid rgba(148, 163, 184, 0.2);
             border-radius: 8px;
-            animation: slideIn 0.5s ease-out;
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            animation: fadeInScale 0.3s ease-out;
+        }
+
+        .registration-count {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(59, 130, 246, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
         }
 
         @media (max-width: 768px) {
@@ -277,6 +164,7 @@
                 flex-direction: column;
                 align-items: center;
             }
+
             .info-container,
             .form-container {
                 width: 100%;
@@ -286,111 +174,128 @@
     </style>
 </head>
 <body>
+    <div class="registration-count" id="registrationCount">Registros: 0</div>
+    
     <div class="header">
-        <i class="fab fa-discord"></i> Penta Games
+        <i class="fab fa-discord"></i>
+        <h1>Penta Games - Registro de Evento</h1>
     </div>
+
     <div class="main-container">
-        <div class="info-container">
-            <div class="profile-pic"></div>
-            <div class="title">Penta Games</div>
-            <div class="subtitle" id="subtitle"></div>
+        <div class="info-container card">
+            <div id="eventInfo">
+                <h2>Próximo Evento</h2>
+                <div id="countdown"></div>
+                <p>¡Únete a nuestra comunidad de gaming!</p>
+                <a href="https://discord.gg/Uf5ezKMQBg" target="_blank" class="button">
+                    <i class="fab fa-discord"></i> Unirse al Discord
+                </a>
+            </div>
         </div>
-        <div class="form-container">
-            <div class="form-group">
-                <label for="nametag">Nametag:</label>
-                <input type="text" id="nametag" placeholder="Escribe tu nametag">
-            </div>
-            <div class="form-group">
-                <label for="discord">Usuario de Discord:</label>
-                <input type="text" id="discord" placeholder="Escribe tu usuario de Discord">
-            </div>
-            <div class="form-group">
-                <label for="reason">¿Por qué quieres estar en nuestro evento?</label>
-                <textarea id="reason" placeholder="Escribe una breve explicación"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="device">Selecciona tu dispositivo:</label>
-                <select id="device">
-                    <option value="móvil">Móvil</option>
-                    <option value="pc">PC</option>
-                    <option value="playstation">PlayStation</option>
-                </select>
-            </div>
-            <button class="button" onclick="saveData()">¡Únete al evento!</button>
+
+        <div class="form-container card">
+            <form id="registrationForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="nametag">Nametag</label>
+                    <input type="text" id="nametag" class="form-control" required minlength="3" maxlength="20">
+                    <div class="error-message" id="nametagError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="discord">Usuario de Discord</label>
+                    <input type="text" id="discord" class="form-control" required pattern="^.{3,32}#[0-9]{4}$">
+                    <div class="error-message" id="discordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reason">¿Por qué quieres participar?</label>
+                    <textarea id="reason" class="form-control" required minlength="20" maxlength="500"></textarea>
+                    <div class="error-message" id="reasonError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="device">Dispositivo</label>
+                    <select id="device" class="form-control" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="móvil">Móvil</option>
+                        <option value="pc">PC</option>
+                        <option value="playstation">PlayStation</option>
+                    </select>
+                    <div class="error-message" id="deviceError"></div>
+                </div>
+
+                <button type="submit" class="button">Registrarse</button>
+            </form>
         </div>
     </div>
-    <div class="loading" id="loading-container">
-        <i class="fas fa-spinner"></i>
+
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content card">
+            <h2>¡Registro Exitoso!</h2>
+            <div id="registrationDetails"></div>
+            <p>Guarda una captura de esta confirmación</p>
+            <button class="button" onclick="downloadConfirmation()">Descargar Confirmación</button>
+        </div>
     </div>
-    <div class="result" id="result-container">
-        <div class="result-title">¡Registro Exitoso!</div>
-        <div class="result-data" id="result-nametag"></div>
-        <div class="result-data" id="result-discord"></div>
-        <div class="result-data" id="result-reason"></div>
-        <div class="result-data" id="result-device"></div>
-        <div class="result-message" id="result-message"></div>
-    </div>
+<script>
+        let registrationCount = parseInt(localStorage.getItem('registrationCount')) || 0;
+        const usedNametags = new Set(JSON.parse(localStorage.getItem('usedNametags')) || []);
+        
+        document.getElementById('registrationCount').textContent = `Registros: ${registrationCount}`;
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const subtitle = document.getElementById('subtitle');
-            const text = [
-                "🎮 ¡Bienvenido a la nueva era de los eventos!",
-                "🏆 Compite por un increíble premio",
-                "🌟 Inscribete ya mismo!!",
-                "🎉 ¡Únete a nuestro server!",
-                " ⬠ | Penta Studios 👑",
-                "https://discord.gg/Uf5ezKMQBg"
-            ];
-
-            function createSpanWithDelay(text, delay) {
-                setTimeout(() => {
-                    const span = document.createElement('span');
-                    span.textContent = text;
-                    subtitle.appendChild(span);
-                }, delay);
-            }
-
-            text.forEach((line, index) => {
-                createSpanWithDelay(line, index * 800);
-            });
-        });
-
-        const usedNametags = new Set();
-        let registrationCount = 0;
-
-        function saveData() {
-            const nametag = document.getElementById('nametag').value.trim();
-            const discord = document.getElementById('discord').value.trim();
-            const reason = document.getElementById('reason').value.trim();
-            const device = document.getElementById('device').value.trim();
-
-            if (!nametag || !discord || !reason || !device) {
-                alert('Por favor, completa todos los campos.');
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            if (usedNametags.has(data.nametag)) {
+                showError('nametag', 'Este nametag ya está registrado');
                 return;
             }
 
-            if (usedNametags.has(nametag)) {
-                alert('Este nametag ya ha sido utilizado. Por favor, elige otro.');
-                return;
-            }
-
-            usedNametags.add(nametag);
+            usedNametags.add(data.nametag);
+            localStorage.setItem('usedNametags', JSON.stringify([...usedNametags]));
             registrationCount++;
+            localStorage.setItem('registrationCount', registrationCount);
+            
+            document.getElementById('registrationCount').textContent = `Registros: ${registrationCount}`;
+            
+            showConfirmation(data);
+        }
 
-            document.querySelector('.main-container').style.display = 'none';
-            document.getElementById('loading-container').classList.add('fade-in');
+        function showError(fieldId, message) {
+            const errorElement = document.getElementById(`${fieldId}Error`);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
 
-            setTimeout(() => {
-                document.getElementById('loading-container').classList.remove('fade-in');
-                document.getElementById('result-container').classList.add('fade-in');
+        function showConfirmation(data) {
+            const modal = document.getElementById('confirmationModal');
+            const details = document.getElementById('registrationDetails');
+            
+            details.innerHTML = `
+                <p><strong>Nametag:</strong> ${data.nametag}</p>
+                <p><strong>Discord:</strong> ${data.discord}</p>
+                <p><strong>Dispositivo:</strong> ${data.device}</p>
+                <p><strong>Número de registro:</strong> #${registrationCount}</p>
+            `;
+            
+            modal.style.display = 'block';
+        }
 
-                document.getElementById('result-nametag').textContent = `Nametag: ${nametag}`;
-                document.getElementById('result-discord').textContent = `Usuario de Discord: ${discord}`;
-                document.getElementById('result-reason').textContent = `Razón: ${reason}`;
-                document.getElementById('result-device').textContent = `Dispositivo: ${device}`;
-                document.getElementById('result-message').textContent = `¡Felicitaciones! Tu registro ha sido exitoso. Eres el participante #${registrationCount}. Toma una captura de pantalla y envíala a Penta Studio.`;
-            }, 3000);
+        function downloadConfirmation() {
+            const details = document.getElementById('registrationDetails').innerText;
+            const blob = new Blob([details], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'confirmacion_registro.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
     </script>
 </body>
